@@ -31,7 +31,8 @@ Sistemas de Origem (OLTP / Arquivos)
 ---
 ## Ingestão de Dados (Bronze Layer)
 Restaurado o banco de dados AdventureWorks no SQL Server, os arquivos foram convertidos do formato .bak para csv a partir da atividade de exportação do programa. Também antes da ingestão, configuramos o ambiente Databricks, definição de catalago, schema importação de bibliotecas e demais ajustes que de primeira mão poderiam ser necessário.
-[Configuração do Ambiente](https://github.com/nadinne94/pipeline_adventureworks/setup_environment.md)
+
+[Configuração do Ambiente](https://github.com/nadinne94/pipeline_adventureworks/blob/main/setup_environment.md)
 
 ### Fontes de Dados
 - Banco de dados relacional (SQL Server – AdventureWorks)
