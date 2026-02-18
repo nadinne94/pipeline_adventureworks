@@ -1,8 +1,7 @@
 # AdventureWorks Data Pipeline
 
 <img src="https://img.shields.io/badge/language-SQL-blue" alt="Logo SQL" height="20"> ![Databricks](https://img.shields.io/badge/Databricks-FF3621?logo=databricks&logoColor=white)
-<img src="https://img.shields.io/badge/Python-yellow?style=for-the-badge&logo=python&logoColor=blue" alt="Logo do Python" height="20"> ![Medallion](https://img.shields.io/badge/architecture-Medallion-blue)
-![Delta Lake](https://img.shields.io/badge/Delta_Lake-003366?logo=apachespark&logoColor=white) <img src="https://img.shields.io/badge/Apache_Spark-A689E1?style=for-the-badge&logo=apachespark&logoColor=#E35A16" height="20">
+<img src="https://img.shields.io/badge/Python-yellow?style=for-the-badge&logo=python&logoColor=blue" alt="Logo do Python" height="20"> ![Delta Lake](https://img.shields.io/badge/Delta_Lake-003366?logo=apachespark&logoColor=white) <img src="https://img.shields.io/badge/Apache_Spark-A689E1?style=for-the-badge&logo=apachespark&logoColor=#E35A16" height="20"> ![Medallion](https://img.shields.io/badge/Medallion%20Architecture-orange)
 
 Pipeline de dados analítico desenvolvido com base no AdventureWorks, aplicando boas práticas de Engenharia de Dados, modelagem dimensional e qualidade de dados, com foco em escalabilidade, governança e consumo analítico.
 
