@@ -1,19 +1,17 @@
----
 # AdventureWorks Data Pipeline
----
+
 <img src="https://img.shields.io/badge/language-SQL-blue" alt="Logo SQL" height="20"> ![Databricks](https://img.shields.io/badge/Databricks-FF3621?logo=databricks&logoColor=white)
 <img src="https://img.shields.io/badge/Python-yellow?style=for-the-badge&logo=python&logoColor=blue" alt="Logo do Python" height="20"> ![Medallion](https://img.shields.io/badge/architecture-Medallion-blue)
 ![Delta Lake](https://img.shields.io/badge/Delta_Lake-003366?logo=apachespark&logoColor=white) <img src="https://img.shields.io/badge/Apache_Spark-A689E1?style=for-the-badge&logo=apachespark&logoColor=#E35A16" height="20">
 
 Pipeline de dados analítico desenvolvido com base no AdventureWorks, aplicando boas práticas de Engenharia de Dados, modelagem dimensional e qualidade de dados, com foco em escalabilidade, governança e consumo analítico.
 
----
 ## Objetivo do Projeto
 Construir um pipeline de dados end-to-end, desde a ingestão de dados operacionais até a disponibilização de dados business-ready, simulando um cenário real de ambiente corporativo analítico.
 
----
 ## Arquitetura de Dados
 Arquitetura baseada no padrão Medallion (Bronze / Silver / Gold), amplamente utilizada em plataformas modernas de dados.
+
 ```
 Sistemas de Origem (OLTP / Arquivos)
               ↓
@@ -28,12 +26,19 @@ Sistemas de Origem (OLTP / Arquivos)
 
 ```
 
----
+## Configuração do Ambiente
+O ambiente de dados foi configurado em plataforma distribuída, seguindo boas práticas de organização, governança e separação por camadas, garantindo escalabilidade e rastreabilidade desde a ingestão dos dados.
+
+As principais configurações incluem:
+- Criação de catálogo e schemas segregados por camada (bronze, silver e gold)
+- Organização do armazenamento utilizando tabelas Delta
+- Preparação de estrutura para governança e monitoramento do pipeline
+- Padronização de nomenclaturas e ambientes
+
+Detalhes técnicos e código de configuração estão documentados em:  
+[Configuração do Ambiente](setup_environment.md)
+
 ## Ingestão de Dados (Bronze Layer)
-Restaurado o banco de dados AdventureWorks no SQL Server, os arquivos foram convertidos do formato .bak para csv a partir da atividade de exportação do programa. Também antes da ingestão, configuramos o ambiente Databricks, definição de catalago, schema importação de bibliotecas e demais ajustes que de primeira mão poderiam ser necessário.
-
-[Configuração do Ambiente](https://github.com/nadinne94/pipeline_adventureworks/blob/main/setup_environment.md)
-
 ### Fontes de Dados
 - Banco de dados relacional (SQL Server – AdventureWorks)
 - Arquivos CSV (exportação de backup .bak)
@@ -57,16 +62,16 @@ Restaurado o banco de dados AdventureWorks no SQL Server, os arquivos foram conv
 - Person.Address
 - Person.CustomerAddress
 ```
-----
+
 ## Tratamento e Qualidade de Dados (Silver Layer)
-Garantir confiabilidade, consistência e padronização dos dados antes do consumo analítico.
+A Silver Layer é responsável por transformar os dados crus da Bronze Layer em **entidades de negócio confiáveis**, aplicando regras de qualidade, padronização e conformidade, **sem aplicação de modelagem dimensional**.
+
 ### Principais Atividades
 - Limpeza de dados
 - Padronização de formatos
 - Aplicação de regras de negócio
 - Enriquecimento de dados
-### Estrutura
-#### Entidade de negócios
+### Estrutura da Silver Layer — Entidades de negócios
 ```
 -- Entidades de Negócio (dados conformados)
 silver.customers
@@ -75,6 +80,8 @@ silver.addresses
 silver.sales_orders
 silver.sales_order_details
 ```
+> A Silver Layer atua como base confiável para a construção da camada analítica (Gold), garantindo separação clara entre tratamento de dados e modelagem orientada ao negócio.
+
 ### Regras de Qualidade Aplicadas
 - Validação de campos obrigatórios
 - Deduplicação de registros
@@ -86,9 +93,9 @@ silver.sales_order_details
 
 >  Os processos de governança são mais complexos e ficaram de fora do escopo inicial do projeto mas que serão aplicados posteriormente[^3]
 
----
 ## Camada Analítica (Gold Layer)
-Disponibilizar dados prontos para análise, com alta performance e entendimento orientado ao negócio.
+Disponibilizar dados prontos para análise por meio de **modelagem dimensional (Star Schema)**, com foco em performance, simplicidade de uso e consumo por ferramentas analíticas.
+
 ### Modelagem
 #### Modelo Dimensional (Star Schema)
 - Dimensões
@@ -103,7 +110,6 @@ Disponibilizar dados prontos para análise, com alta performance e entendimento 
 - Facilidade de uso por times de BI e Analytics
 - Integração direta com ferramentas de visualização (ex.: Power BI)
 
----
 ## Tecnologias Utilizadas
 - SQL
 - Python / PySpark
@@ -111,14 +117,13 @@ Disponibilizar dados prontos para análise, com alta performance e entendimento 
 - Delta Lake
 - SQL Server
 
----
 ## Próximos Passos
 - Incremental load com CDC
 - Streaming de dados
 - Mascaramento de PII
 - Testes automatizados de qualidade
 - Dashboards analíticos
-
+---
 ## Notas
 [^1]:Catálogo de dados: organiza e descreve os dados disponíveis
 [^2]:Linha de dados mostra o caminho que eles percorrem da origem até o consumo
