@@ -1,1 +1,121 @@
-# pipeline_adventureworks
+---
+# AdventureWorks Data Pipeline
+---
+<img src="https://img.shields.io/badge/language-SQL-blue" alt="Logo SQL" height="20"> ![Databricks](https://img.shields.io/badge/Databricks-FF3621?logo=databricks&logoColor=white)
+<img src="https://img.shields.io/badge/Python-yellow?style=for-the-badge&logo=python&logoColor=blue" alt="Logo do Python" height="20"> ![Medallion](https://img.shields.io/badge/architecture-Medallion-blue)
+![Delta Lake](https://img.shields.io/badge/Delta_Lake-003366?logo=apachespark&logoColor=white) <img src="https://img.shields.io/badge/Apache_Spark-A689E1?style=for-the-badge&logo=apachespark&logoColor=#E35A16" height="20">
+
+Pipeline de dados analítico desenvolvido com base no AdventureWorks, aplicando boas práticas de Engenharia de Dados, modelagem dimensional e qualidade de dados, com foco em escalabilidade, governança e consumo analítico.
+
+---
+## Objetivo do Projeto
+Construir um pipeline de dados end-to-end, desde a ingestão de dados operacionais até a disponibilização de dados business-ready, simulando um cenário real de ambiente corporativo analítico.
+
+---
+## Arquitetura de Dados
+Arquitetura baseada no padrão Medallion (Bronze / Silver / Gold), amplamente utilizada em plataformas modernas de dados.
+```
+Sistemas de Origem (OLTP / Arquivos)
+              ↓
+        Bronze Layer
+ (dados crus, históricos e imutáveis)
+              ↓
+        Silver Layer
+ (dados limpos, padronizados e confiáveis)
+              ↓
+        Gold Layer
+ (dados agregados e orientados ao negócio)
+
+```
+
+---
+## Ingestão de Dados (Bronze Layer)
+### Fontes de Dados
+- Banco de dados relacional (SQL Server – AdventureWorks)
+- Arquivos CSV (exportação de backup .bak)
+- Estrutura preparada para ingestão via APIs e streaming
+
+### Características
+- Carga full load inicial
+- Preservação do histórico completo
+- Dados armazenados sem transformações
+- Base para rastreabilidade e auditoria
+
+### Tabelas Bronze:
+```
+- Sales.SalesOrderHeader
+- Sales.SalesOrderDetail
+- Production.Product
+- Production.ProductCategory
+- Production.ProductModel
+- Production.ProductDescription
+- Person.Customer
+- Person.Address
+- Person.CustomerAddress
+```
+----
+## Tratamento e Qualidade de Dados (Silver Layer)
+Garantir confiabilidade, consistência e padronização dos dados antes do consumo analítico.
+### Principais Atividades
+- Limpeza de dados
+- Padronização de formatos
+- Aplicação de regras de negócio
+- Enriquecimento de dados
+### Estrutura
+#### Entidade de negócios
+```
+-- Entidades de Negócio (dados conformados)
+silver.customers
+silver.products
+silver.addresses
+silver.sales_orders
+silver.sales_order_details
+```
+### Regras de Qualidade Aplicadas
+- Validação de campos obrigatórios
+- Deduplicação de registros
+- Padronização de datas, moedas e unidades
+
+### Governança de Dados
+- Criar catálago de dados[^1]
+- Configurar linha de dados[^2]
+
+>  Os processos de governança são mais complexos e ficaram de fora do escopo inicial do projeto mas que serão aplicados posteriormente[^3]
+
+---
+## Camada Analítica (Gold Layer)
+Disponibilizar dados prontos para análise, com alta performance e entendimento orientado ao negócio.
+### Modelagem
+#### Modelo Dimensional (Star Schema)
+- Dimensões
+  - dim_consumer
+  - dim_address
+  - dim_product
+- Fatos
+  - fact_sales_header
+  - fact_sales_detail
+### Benefícios
+- Consultas analíticas otimizadas
+- Facilidade de uso por times de BI e Analytics
+- Integração direta com ferramentas de visualização (ex.: Power BI)
+
+---
+## Tecnologias Utilizadas
+- SQL
+- Python / PySpark
+- Spark
+- Delta Lake
+- SQL Server
+
+---
+## Próximos Passos
+- Incremental load com CDC
+- Streaming de dados
+- Mascaramento de PII
+- Testes automatizados de qualidade
+- Dashboards analíticos
+
+## Notas
+[^1]:Catálogo de dados: organiza e descreve os dados disponíveis
+[^2]:Linha de dados mostra o caminho que eles percorrem da origem até o consumo
+[^3]:Processos implementação de pipeline por níveis: [Checklist de Implementação](https://www.linkedin.com/in/nadinne-cavalcante/)
