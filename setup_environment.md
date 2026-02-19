@@ -1,7 +1,7 @@
 # Configuração do Ambiente de Dados (Databricks)
 Este documento descreve a configuração técnica do ambiente de dados utilizado no projeto, com foco em organização por camadas, governança, rastreabilidade e suporte à execução do pipeline analítico.
 
-Para acessar o código:
+Para acessar o código completo:
 [Configuração do Ambiente](https://github.com/nadinne94/dabricks_data_engineer_learning_plan/blob/main/etl_adventureworks/00_Setup_Environment.ipynb)
 
 ## Importação de Bibliotecas
