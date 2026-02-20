@@ -2,6 +2,8 @@
 Este notebook é responsável pela ingestão inicial dos dados na Bronze Layer, seguindo os princípios da arquitetura Medallion.
 O objetivo é carregar os dados exatamente como chegam da origem, preservando histórico, rastreabilidade e metadados de ingestão, sem aplicar regras de negócio ou transformações analíticas.
 
+![Ingestão de Dados](https://github.com/user-attachments/assets/c71695be-1b09-40d4-be2b-a83af87dc6f4)
+
 ## Inicialização do Ambiente
 Antes da execução da ingestão, o notebook reutiliza um módulo de configuração centralizado.
 ```
@@ -88,6 +90,7 @@ def ingest_table(source_table, target_table):
        print(f"Erro: {str(e)[:200]}...")
        raise e
 ```
+
 Metadados adicionados:
 - `_ingestion_timestamp`: momento da ingestão
 - `_source_table`: tabela de origem
