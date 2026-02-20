@@ -10,25 +10,12 @@ Este repositório apresenta a visão geral de um pipeline de dados end-to-end. A
 ## Objetivo do Projeto
 Construir um pipeline de dados end-to-end, desde a ingestão de dados operacionais até a disponibilização de dados business-ready, simulando um cenário real de ambiente corporativo analítico.
 
-![Diagrama Raw → Bronze → Silver → Gold](https://github.com/user-attachments/assets/9c0797c5-b911-447a-96a7-905b07b59b8a)
-
-
 ## Arquitetura de Dados
 Arquitetura baseada no padrão Medallion (Bronze / Silver / Gold), amplamente utilizada em plataformas modernas de dados.
 
-```
-Sistemas de Origem (OLTP / Arquivos)
-              ↓
-        Bronze Layer
- (dados crus, históricos e imutáveis)
-              ↓
-        Silver Layer
- (dados limpos, padronizados e confiáveis)
-              ↓
-        Gold Layer
- (dados agregados e orientados ao negócio)
+![Diagrama Raw → Bronze → Silver → Gold](https://github.com/user-attachments/assets/9c0797c5-b911-447a-96a7-905b07b59b8a)
 
-```
+Cada camada possui responsabilidades bem definidas, desde ingestão de dados brutos até disponibilização de dados analíticos prontos para consumo.
 
 ## Configuração do Ambiente
 O ambiente de dados foi configurado em plataforma distribuída, seguindo boas práticas de organização, governança e separação por camadas, garantindo escalabilidade e rastreabilidade desde a ingestão dos dados.
