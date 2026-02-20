@@ -8,6 +8,9 @@ Pipeline de dados analítico desenvolvido com base no AdventureWorks, aplicando 
 ## Objetivo do Projeto
 Construir um pipeline de dados end-to-end, desde a ingestão de dados operacionais até a disponibilização de dados business-ready, simulando um cenário real de ambiente corporativo analítico.
 
+![Diagrama Raw → Bronze → Silver → Gold](https://github.com/user-attachments/assets/9c0797c5-b911-447a-96a7-905b07b59b8a)
+
+
 ## Arquitetura de Dados
 Arquitetura baseada no padrão Medallion (Bronze / Silver / Gold), amplamente utilizada em plataformas modernas de dados.
 
@@ -34,8 +37,7 @@ As principais configurações incluem:
 - Preparação de estrutura para governança e monitoramento do pipeline
 - Padronização de nomenclaturas e ambientes
 
-Detalhes técnicos e código de configuração estão documentados em:  
-[Configuração do Ambiente](setup_environment.md)
+> Detalhamento da configuração do ambiente: [Configuração do Ambiente](setup_environment.md)
 
 ## Ingestão de Dados (Bronze Layer)
 ### Fontes de Dados
@@ -61,6 +63,7 @@ Detalhes técnicos e código de configuração estão documentados em:
 - Person.Address
 - Person.CustomerAddress
 ```
+>Detalhamento da camada Bronze: [Bronze Layer](https://github.com/nadinne94/pipeline_adventureworks/blob/main/bronze_ingestion.md)
 
 ## Tratamento e Qualidade de Dados (Silver Layer)
 A Silver Layer é responsável por transformar os dados crus da Bronze Layer em **entidades de negócio confiáveis**, aplicando regras de qualidade, padronização e conformidade, **sem aplicação de modelagem dimensional**.
@@ -90,7 +93,9 @@ silver.sales_order_details
 - Criar catálago de dados[^1]
 - Configurar linha de dados[^2]
 
->  Os processos de governança são mais complexos e ficaram de fora do escopo inicial do projeto mas que serão aplicados posteriormente[^3]
+> Detalhamento da camada Silver: [Silver Layer](https://github.com/nadinne94/pipeline_adventureworks/blob/main/silver_layer.md)
+
+> Os processos de governança são mais complexos e ficaram de fora do escopo inicial do projeto mas que serão aplicados posteriormente[^3]
 
 ## Camada Analítica (Gold Layer)
 Disponibilizar dados prontos para análise por meio de **modelagem dimensional (Star Schema)**, com foco em performance, simplicidade de uso e consumo por ferramentas analíticas.
@@ -108,6 +113,8 @@ Disponibilizar dados prontos para análise por meio de **modelagem dimensional (
 - Consultas analíticas otimizadas
 - Facilidade de uso por times de BI e Analytics
 - Integração direta com ferramentas de visualização (ex.: Power BI)
+
+>Detalhamento da camada Gold: [Gold Layer](https://github.com/nadinne94/pipeline_adventureworks/blob/main/gold.md)
 
 ## Tecnologias Utilizadas
 - SQL
