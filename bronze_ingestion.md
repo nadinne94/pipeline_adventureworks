@@ -150,5 +150,4 @@ Ao final deste notebook, a Bronze Layer contém:
 - Metadados de ingestão
 - Base confiável para a Silver Layer
 
-Para acessar o código completo:
-[Bronze_Ingestion](https://github.com/nadinne94/dabricks_data_engineer_learning_plan/blob/main/etl_adventureworks/01_Bronze_Ingestion.ipynb)
+>Notebook: [Bronze_Ingestion](https://github.com/nadinne94/dabricks_data_engineer_learning_plan/blob/main/etl_adventureworks/01_Bronze_Ingestion.ipynb)
