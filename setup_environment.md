@@ -21,10 +21,13 @@ from datetime import datetime
 ```
 
 ## Criar Catálogo e Schema
-Para organizar as tabelas de acordo com cada etapa do pipeline, foram criados schemas separados para as camadas Bronze, Silver e Gold.  
-Como não foi utilizado armazenamento externo, foram criados volumes gerenciados para persistência das tabelas Delta.
+O ambiente é organizado a partir de um catálogo único (`adventureworks`), com schemas separados por camada do pipeline (Bronze, Silver e Gold).
+Cada schema possui um volume dedicado para armazenamento de tabelas Delta.
+A governança do pipeline é centralizada no schema `metadata`, que contém a tabela de controle de execução (`etl_control`), responsável por registrar status, métricas e erros das cargas.
 
-Também foi criado um schema dedicado a metadados, com foco em governança e controle de execução do pipeline.
+![Organização do Ambiente](https://github.com/user-attachments/assets/7874d8a4-17fc-4fa2-bafb-859a0e0c7242)
+
+A estrutura abaixo segue o padrão Medallion Architecture, garantindo separação clara de responsabilidades, governança e escalabilidade do pipeline de dados.
 
 ```
 %sql
@@ -48,7 +51,6 @@ CREATE VOLUME IF NOT EXISTS gold.delta_tables;
 -- Schema de metadados para governança, monitoramento e controle de execução do pipeline
 CREATE SCHEMA IF NOT EXISTS metadata;
 ```
-A estrutura acima segue o padrão Medallion Architecture, garantindo separação clara de responsabilidades, governança e escalabilidade do pipeline de dados.
 
 ## Configuração de Caminhos no Workspace
 Esta etapa define os caminhos de armazenamento utilizados pelo pipeline dentro do workspace, organizando os dados de forma padronizada por camada (Bronze, Silver e Gold).
