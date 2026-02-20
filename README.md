@@ -5,6 +5,8 @@
 
 Pipeline de dados analítico desenvolvido com base no AdventureWorks, aplicando boas práticas de Engenharia de Dados, modelagem dimensional e qualidade de dados, com foco em escalabilidade, governança e consumo analítico.
 
+Este repositório apresenta a visão geral de um pipeline de dados end-to-end. A documentação detalhada de cada camada está disponível nos links abaixo.
+
 ## Objetivo do Projeto
 Construir um pipeline de dados end-to-end, desde a ingestão de dados operacionais até a disponibilização de dados business-ready, simulando um cenário real de ambiente corporativo analítico.
 
