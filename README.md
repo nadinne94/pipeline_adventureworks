@@ -114,7 +114,7 @@ Disponibilizar dados prontos para análise por meio de **modelagem dimensional (
 - Facilidade de uso por times de BI e Analytics
 - Integração direta com ferramentas de visualização (ex.: Power BI)
 
->Detalhamento da camada Gold: [Gold Layer](https://github.com/nadinne94/pipeline_adventureworks/blob/main/gold.md)
+>Detalhamento da camada Gold: [Gold Layer](https://github.com/nadinne94/pipeline_adventureworks/blob/main/gold_layer.md)
 
 ## Tecnologias Utilizadas
 - SQL
