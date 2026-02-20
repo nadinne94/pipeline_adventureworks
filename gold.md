@@ -23,7 +23,9 @@ As dimensões fornecem **contexto descritivo** para análise das métricas de ve
 As tabelas fato armazenam **métricas quantitativas**, com diferentes níveis de granularidade:
 * `fact_sales` → nível de pedido
 * `fact_detail` → nível de item do pedido
-  
+
+![Gold Star Schema](https://github.com/user-attachments/assets/2f90610f-2448-411f-84ba-b553dee6e88f)
+
 ## Dimensões
 ### `gold.dim_date` — Dimensão Tempo
 
