@@ -86,22 +86,31 @@ silver.sales_order_details
 
 > Os processos de governança são mais complexos e ficaram de fora do escopo inicial do projeto mas que serão aplicados posteriormente[^3]
 
-## Camada Analítica (Gold Layer)
-Disponibilizar dados prontos para análise por meio de **modelagem dimensional (Star Schema)**, com foco em performance, simplicidade de uso e consumo por ferramentas analíticas.
+## Camada Analítica — Gold Layer
 
-### Modelagem
-#### Modelo Dimensional (Star Schema)
-- Dimensões
-  - dim_consumer
-  - dim_address
-  - dim_product
-- Fatos
-  - fact_sales_header
-  - fact_sales_detail
+A **Gold Layer** disponibiliza dados **prontos para análise**, aplicando **modelagem dimensional (Star Schema)** e **Data Marts analíticos**, com foco em performance e simplicidade de consumo.
+
+### Modelo Dimensional (Star Schema)
+#### Dimensões
+* `dim_date`
+* `dim_customer`
+* `dim_product`
+* `dim_address`
+
+#### Tabelas Fato
+* `fact_sales` — nível de pedido
+* `fact_detail` — nível de item do pedido
+
+### Data Marts Analíticos
+Além do modelo dimensional, a Gold Layer disponibiliza **Data Marts com métricas pré-agregadas**, prontos para consumo por ferramentas de BI e Analytics:
+* `mart_sales_by_category`
+* `mart_top_customers`
+* `mart_monthly_performance`
+
 ### Benefícios
-- Consultas analíticas otimizadas
-- Facilidade de uso por times de BI e Analytics
-- Integração direta com ferramentas de visualização (ex.: Power BI)
+* Consultas analíticas otimizadas
+* Clareza semântica para usuários de negócio
+* Integração direta com ferramentas de visualização (ex.: Power BI)
 
 >Detalhamento da camada Gold: [Gold Layer](https://github.com/nadinne94/pipeline_adventureworks/blob/main/gold_layer.md)
 
