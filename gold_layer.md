@@ -173,15 +173,78 @@ Armazena o **nível mais granular da venda**, representando cada produto vendido
 
 >Notebook: [Fact Detail](https://github.com/nadinne94/dabricks_data_engineer_learning_plan/blob/main/etl_adventureworks/12_Gold_Fact_Detail.ipynb)
 
+## Data Marts Analíticos (Agregações de Negócio)
+Além do modelo dimensional, a Gold Layer disponibiliza **Data Marts prontos para consumo**, com métricas pré-agregadas e foco em perguntas de negócio recorrentes.
+
+Esses marts são construídos a partir das tabelas fato e dimensões e persistidos em **Delta Lake**.
+
+### `gold.mart_sales_by_category` — Vendas por Categoria
+**Objetivo:**
+Analisar o desempenho de vendas por **categoria de produto** ao longo do tempo.
+**Granularidade:**
+Categoria × Mês × Ano
+**Principais métricas:**
+* Total de pedidos
+* Unidades vendidas
+* Receita total
+* Lucro total
+* Margem média (%)
+
+**Casos de uso:**
+* Comparação de performance entre categorias
+* Análise de rentabilidade
+* Suporte a dashboards executivos
+
+### `gold.mart_top_customers` — Top Clientes
+**Objetivo:**
+Identificar os **clientes mais valiosos** com base em volume e valor de compras.
+
+**Granularidade:**
+1 linha por cliente
+
+**Principais métricas:**
+* Total de pedidos
+* Unidades compradas
+* Valor total gasto
+* Ticket médio
+* Data da última compra
+* Dias desde a última compra
+
+**Casos de uso:**
+* Programas de fidelidade
+* Segmentação de clientes
+* Análises de churn e recência
+
+### `gold.mart_monthly_performance` — Performance Mensal
+**Objetivo:**
+Avaliar a **performance consolidada do negócio** ao longo do tempo.
+
+**Granularidade:**
+Mês × Ano
+
+**Principais métricas:**
+* Número de pedidos
+* Clientes únicos
+* Unidades vendidas
+* Receita
+* Lucro bruto
+* Margem de lucro (%)
+* Pedidos online vs. loja física
+
+**Casos de uso:**
+* Acompanhamento de KPIs
+* Análise de sazonalidade
+* Comparações mensais e trimestrais
+
+> Notebook: [Data Marts](https://github.com/nadinne94/dabricks_data_engineer_learning_plan/blob/main/etl_adventureworks/13_Gold_Data_Marts)
+
 ## Persistência e Governança
 * Todas as tabelas são gravadas em **Delta Lake**
 * Persistência dupla:
-
   * Diretório físico (`gold_path`)
   * Tabela gerenciada (`gold.*`)
 * Controle de execução via função `log_etl`
 * Estrutura preparada para:
-
   * Auditoria
   * Monitoramento
   * Evolução incremental
