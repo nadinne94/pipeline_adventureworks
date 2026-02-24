@@ -118,3 +118,13 @@ A Silver Layer atua como **camada confiável e reutilizável**, desacoplando:
 * Da lógica analítica e dimensional (Gold)
 Essa separação garante escalabilidade, governança e evolução segura do pipeline.
 
+---
+<div align='left'> 
+
+  [Camada Silver](silver_layer.md)
+</div><div align='right'>
+  
+  [Camada Gold](gold_layer.md)
+</div>
+
+
