@@ -249,9 +249,6 @@ Mês × Ano
   * Monitoramento
   * Evolução incremental
 ---
-[Introdução](README.md)<br>
-[Configuração do Ambiente](setup_environment.md)<br>
-[Camada Bronze](bronze_ingestion.md)<br>
 [Camada Silver](silver_layer.md)<br>
 
 ---
