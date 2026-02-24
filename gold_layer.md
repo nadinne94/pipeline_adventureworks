@@ -250,7 +250,7 @@ Mês × Ano
   * Evolução incremental
 ---
 [Introdução](README.md)<br>
-[Configuração do Ambiente](setup_envinronmet.md)<br>
+[Configuração do Ambiente](setup_envinronment.md)<br>
 [Camada Bronze](bronze_ingestion.md)<br>
 [Camada Silver](silver_layer.md)<br>
 
