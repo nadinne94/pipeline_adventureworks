@@ -154,3 +154,14 @@ Ao final deste notebook, a Bronze Layer contém:
 - Base confiável para a Silver Layer
 
 >Notebook: [Bronze_Ingestion](https://github.com/nadinne94/dabricks_data_engineer_learning_plan/blob/main/etl_adventureworks/01_Bronze_Ingestion.ipynb)
+
+---
+<div align='left'> 
+
+  [Camada Bronze](bronze_ingestion.md)
+</div><div align='right'>
+  
+  [Camada Silver](silver_layer.md)
+</div>
+
+---
