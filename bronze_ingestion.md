@@ -158,7 +158,7 @@ Ao final deste notebook, a Bronze Layer contém:
 ---
 <div align='left'> 
 
-  [Camada Bronze](bronze_ingestion.md)
+  [Configuração do Ambiente](setup_environment.md)
 </div><div align='right'>
   
   [Camada Silver](silver_layer.md)
