@@ -121,7 +121,7 @@ Essa separação garante escalabilidade, governança e evolução segura do pipe
 ---
 <div align='left'> 
 
-  [Camada Bronze](silver_layer.md)
+  [Camada Bronze](bronze_ingestion.md)
 </div><div align='right'>
   
   [Camada Gold](gold_layer.md)
