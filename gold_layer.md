@@ -1,16 +1,18 @@
 # Gold Layer – Camada Analítica (Business-Ready)
 A **Gold Layer** representa a camada final do pipeline de dados, projetada para **consumo analítico**, **dashboards** e **análises de negócio**.
-Os dados nesta camada seguem o **modelo dimensional (Star Schema)**, garantindo:
 
-* Alta performance para consultas analíticas
-* Clareza semântica para usuários de negócio
-* Separação clara entre métricas (fatos) e contextos (dimensões)
+Ela atua como a **interface oficial de consumo de dados**, abstraindo a complexidade das camadas anteriores e disponibilizando um modelo dimensional otimizado para análise.
+
+Os dados nesta camada seguem o **modelo dimensional (Star Schema)**, garantindo:
+- Alta performance para consultas analíticas
+- Clareza semântica para usuários de negócio
+- Separação clara entre métricas (fatos) e contextos (dimensões)
 
 Nesta camada, os dados já passaram por:
+- Ingestão e persistência (Bronze)
+- Limpeza, padronização e enriquecimento (Silver)
 
-* Ingestão e persistência (Bronze)
-* Limpeza, padronização e enriquecimento (Silver)
-* 
+
 ## Modelo Dimensional (Star Schema)
 ### Dimensões
 As dimensões fornecem **contexto descritivo** para análise das métricas de vendas.
@@ -23,6 +25,7 @@ As dimensões fornecem **contexto descritivo** para análise das métricas de ve
 As tabelas fato armazenam **métricas quantitativas**, com diferentes níveis de granularidade:
 * `fact_sales` → nível de pedido
 * `fact_detail` → nível de item do pedido
+A separação entre fact_sales e fact_detail permite análises em diferentes níveis de agregação, evitando duplicidade de métricas e preservando consistência analítica.
 
 ![Gold Star Schema](https://github.com/user-attachments/assets/2f90610f-2448-411f-84ba-b553dee6e88f)
 
@@ -58,12 +61,11 @@ Centralizar informações do cliente e permitir análises por perfil de consumid
 Dados consolidados da Silver (`customer` + `customer_address`)
 
 **Características:**
-
 * Uso de **surrogate key** (`customer_key`)
-* Estrutura preparada para **Slowly Changing Dimension (SCD Tipo 2)**
-
+* A dimensão de cliente foi estruturada para suportar Slowly Changing Dimension Tipo 2, permitindo manter histórico de alterações cadastrais sem sobrescrever registros anteriores.
+  
 **Principais atributos:**
-
+* customer_key (surrogate key gerada na camada Gold)
 * Identificadores do cliente
 * Nome completo
 * Email
@@ -76,7 +78,7 @@ Dados consolidados da Silver (`customer` + `customer_address`)
 Fornecer contexto completo do produto para análises comerciais e financeiras.
 
 **Principais atributos:**
-
+* product_key (surrogate key)
 * Categoria e modelo
 * Preço de lista e custo padrão
 * Margem percentual
@@ -94,7 +96,7 @@ Fornecer contexto completo do produto para análises comerciais e financeiras.
 Permitir análises geográficas e logísticas.
 
 **Principais atributos:**
-
+* address_key (surrogate key)
 * Cidade, estado, país
 * Código postal
 * Endereço completo
@@ -105,7 +107,7 @@ Permitir análises geográficas e logísticas.
 * Análise por região
 * Comparação entre endereço de cobrança e entrega
 
->Notebook: [Dimesões](https://github.com/nadinne94/dabricks_data_engineer_learning_plan/blob/main/etl_adventureworks/10_Gold_Dimensions.ipynb)
+>Notebook: [Dimensões](https://github.com/nadinne94/dabricks_data_engineer_learning_plan/blob/main/etl_adventureworks/10_Gold_Dimensions.ipynb)
 
 ## Tabelas Fato
 ### `gold.fact_sales` — Fato Vendas (Nível de Pedido)
@@ -163,7 +165,7 @@ Armazena o **nível mais granular da venda**, representando cada produto vendido
 * **Lucro Bruto:**
   `line_total - (standard_cost × quantity)`
 * **Margem de Lucro (%):**
-  `(lucro bruto / custo total) × 100`
+  `(lucro_bruto / (standard_cost × quantity)) × 100`
 
 **Uso em análises:**
 
@@ -172,6 +174,19 @@ Armazena o **nível mais granular da venda**, representando cada produto vendido
 * Margem por categoria ou modelo
 
 >Notebook: [Fact Detail](https://github.com/nadinne94/dabricks_data_engineer_learning_plan/blob/main/etl_adventureworks/12_Gold_Fact_Detail.ipynb)
+
+### Relacionamentos
+
+As tabelas fato se conectam às dimensões por meio de surrogate keys, garantindo:
+- Independência entre sistemas fonte e modelo analítico
+- Flexibilidade para histórico de mudanças (SCD)
+- Melhor performance em consultas analíticas
+
+## Decisões Arquiteturais
+- Utilização de Star Schema para reduzir complexidade de JOINs e otimizar consultas analíticas.
+- Separação entre fatos de pedido e fatos de item para evitar duplicidade de métricas.
+- Uso de surrogate keys para desacoplamento do modelo analítico em relação aos sistemas fonte.
+- Estrutura preparada para implementação futura de cargas incrementais e SCD Tipo 2.
 
 ## Data Marts Analíticos (Agregações de Negócio)
 Além do modelo dimensional, a Gold Layer disponibiliza **Data Marts prontos para consumo**, com métricas pré-agregadas e foco em perguntas de negócio recorrentes.
@@ -240,16 +255,15 @@ Mês × Ano
 
 ## Persistência e Governança
 * Todas as tabelas são gravadas em **Delta Lake**
-* Persistência dupla:
-  * Diretório físico (`gold_path`)
-  * Tabela gerenciada (`gold.*`)
+* Controle transacional garantido por ACID (Delta Lake)
+* Possibilidade de time travel para auditoria histórica
 * Controle de execução via função `log_etl`
 * Estrutura preparada para:
   * Auditoria
   * Monitoramento
   * Evolução incremental
 ---
-[Camada Silver](silver_layer.md)<br>
+[Camada Silver](silver_layer.md)
 
 ---
 
