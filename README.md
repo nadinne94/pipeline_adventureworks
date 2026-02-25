@@ -3,19 +3,37 @@
 <img src="https://img.shields.io/badge/language-SQL-blue" alt="Logo SQL" height="20"> ![Databricks](https://img.shields.io/badge/Databricks-FF3621?logo=databricks&logoColor=white)
 <img src="https://img.shields.io/badge/Python-yellow?style=for-the-badge&logo=python&logoColor=blue" alt="Logo do Python" height="20"> ![Delta Lake](https://img.shields.io/badge/Delta_Lake-003366?logo=apachespark&logoColor=white) <img src="https://img.shields.io/badge/Apache_Spark-A689E1?style=for-the-badge&logo=apachespark&logoColor=#E35A16" height="20"> ![Medallion](https://img.shields.io/badge/Medallion%20Architecture-orange)
 
-Pipeline de dados analítico desenvolvido com base no AdventureWorks, aplicando boas práticas de Engenharia de Dados, modelagem dimensional e qualidade de dados, com foco em escalabilidade, governança e consumo analítico.
+Este projeto simula a construção de um pipeline de dados corporativo utilizando o dataset AdventureWorks. O objetivo é estruturar um fluxo completo de ingestão, transformação e modelagem analítica seguindo boas práticas de Engenharia de Dados.
 
-Este repositório apresenta a visão geral de um pipeline de dados end-to-end. A documentação detalhada de cada camada está disponível nos links abaixo.
+O pipeline foi desenvolvido com foco em arquitetura Lakehouse e modelagem dimensional para consumo analítico.
 
-## Objetivo do Projeto
-Construir um pipeline de dados end-to-end, desde a ingestão de dados operacionais até a disponibilização de dados business-ready, simulando um cenário real de ambiente corporativo analítico.
+O projeto foi desenvolvido em ambiente Databricks utilizando processamento distribuído com Apache Spark.
 
-## Arquitetura de Dados
-Arquitetura baseada no padrão Medallion (Bronze / Silver / Gold), amplamente utilizada em plataformas modernas de dados.
-
+## Arquitetura do Pipeline
+O projeto segue a arquitetura Lakehouse, organizando os dados em três camadas:
 ![Diagrama Raw → Bronze → Silver → Gold](https://github.com/user-attachments/assets/9c0797c5-b911-447a-96a7-905b07b59b8a)
 
-Cada camada possui responsabilidades bem definidas, desde ingestão de dados brutos até disponibilização de dados analíticos prontos para consumo.
+### Bronze
+* Ingestão de dados brutos
+* Preservação da estrutura original
+* Base para rastreabilidade
+
+### Silver
+* Limpeza e padronização
+* Tratamento de inconsistências
+* Enriquecimento de dados
+
+### Gold
+* Modelagem dimensional (Star Schema)
+* Criação de tabelas fato e dimensão
+* Estrutura otimizada para consultas analíticas
+
+## Stack Tecnológica
+* Python
+* PySpark
+* SQL
+* Delta Lake
+* Git
 
 ## Configuração do Ambiente
 O ambiente de dados foi configurado em plataforma distribuída, seguindo boas práticas de organização, governança e separação por camadas, garantindo escalabilidade e rastreabilidade desde a ingestão dos dados.
@@ -35,8 +53,7 @@ As principais configurações incluem:
 - Estrutura preparada para ingestão via APIs e streaming
 
 ### Características
-- Carga full load inicial
-- Preservação do histórico completo
+- Carga inicial full load com estrutura preparada para futuras cargas incrementais.
 - Dados armazenados sem transformações
 - Base para rastreabilidade e auditoria
 
@@ -79,8 +96,8 @@ silver.sales_order_details
 - Padronização de datas, moedas e unidades
 
 ### Governança de Dados
-- Criar catálago de dados[^1]
-- Configurar linha de dados[^2]
+- Implementação planejada de catálogo de dados[^1]
+- Planejamento de rastreabilidade (data lineage)[^2]
 
 > Detalhamento da camada Silver: [Silver Layer](https://github.com/nadinne94/pipeline_adventureworks/blob/main/silver_layer.md)
 
@@ -90,7 +107,17 @@ silver.sales_order_details
 
 A **Gold Layer** disponibiliza dados **prontos para análise**, aplicando **modelagem dimensional (Star Schema)** e **Data Marts analíticos**, com foco em performance e simplicidade de consumo.
 
-### Modelo Dimensional (Star Schema)
+### Modelagem Dimensional
+A camada Gold foi modelada utilizando Star Schema, com:
+* Tabelas fato contendo métricas de negócio
+* Tabelas dimensão contendo atributos descritivos
+* Relacionamentos estruturados para consultas analíticas eficientes
+
+Essa abordagem permite:
+* Melhor performance em consultas
+* Facilidade na geração de KPIs
+* Estrutura clara para ferramentas de BI
+
 #### Dimensões
 * `dim_date`
 * `dim_customer`
@@ -98,8 +125,8 @@ A **Gold Layer** disponibiliza dados **prontos para análise**, aplicando **mode
 * `dim_address`
 
 #### Tabelas Fato
-* `fact_sales` — nível de pedido
-* `fact_detail` — nível de item do pedido
+* `fact_sales` — grão definido no nível de pedido
+* `fact_detail`grão definido no nível de item do pedidonível de item do pedido
 
 ### Data Marts Analíticos
 Além do modelo dimensional, a Gold Layer disponibiliza **Data Marts com métricas pré-agregadas**, prontos para consumo por ferramentas de BI e Analytics:
@@ -107,26 +134,34 @@ Além do modelo dimensional, a Gold Layer disponibiliza **Data Marts com métric
 * `mart_top_customers`
 * `mart_monthly_performance`
 
-### Benefícios
-* Consultas analíticas otimizadas
-* Clareza semântica para usuários de negócio
-* Integração direta com ferramentas de visualização (ex.: Power BI)
-
 >Detalhamento da camada Gold: [Gold Layer](https://github.com/nadinne94/pipeline_adventureworks/blob/main/gold_layer.md)
 
-## Tecnologias Utilizadas
-- SQL
-- Python / PySpark
-- Spark
-- Delta Lake
-- SQL Server
+## Desafios Técnicos Enfrentados
+Durante o desenvolvimento do pipeline, alguns desafios técnicos incluíram:
+* Garantir integridade entre tabelas fato e dimensão
+* Padronização de dados provenientes de múltiplas fontes
+* Definição do grão das tabelas fato
+* Separação adequada entre camada de tratamento (Silver) e modelagem (Gold)
+Essas decisões foram fundamentais para garantir consistência analítica e escalabilidade.
 
-## Próximos Passos
-- Incremental load com CDC
-- Streaming de dados
-- Mascaramento de PII
-- Testes automatizados de qualidade
-- Dashboards analíticos
+## Conceitos Aplicados
+* ETL
+* Arquitetura Lakehouse
+* Modelagem Dimensional
+* Star Schema
+* JOINs complexos
+* CTE
+* Window Functions
+* Versionamento com Delta Lake
+
+## Escalabilidade e Evolução
+Em ambiente produtivo, este pipeline poderia evoluir com:
+* Particionamento por data
+* Processamento incremental
+* Orquestração com ferramenta dedicada
+* Monitoramento e logging
+* Validação de qualidade de dados
+
 ---
 ## Notas
 [^1]:Catálogo de dados: organiza e descreve os dados disponíveis
