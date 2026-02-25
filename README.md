@@ -72,7 +72,7 @@ As principais configurações incluem:
 >Detalhamento da camada Bronze: [Bronze Layer](https://github.com/nadinne94/pipeline_adventureworks/blob/main/bronze_ingestion.md)
 
 ## Tratamento e Qualidade de Dados (Silver Layer)
-A Silver Layer é responsável por transformar os dados crus da Bronze Layer em **entidades de negócio confiáveis**, aplicando regras de qualidade, padronização e conformidade, **sem aplicação de modelagem dimensional**.
+A Silver Layer é responsável por transformar os dados crus da Bronze Layer em **entidades de negócio confiáveis**, aplicando regras de qualidade, padronização e conformidade, mantendo estrutura normalizada orientada a entidades de negócio, sem aplicação de modelagem dimensional nesta etapa.
 
 ### Principais Atividades
 - Limpeza de dados
@@ -126,7 +126,7 @@ Essa abordagem permite:
 
 #### Tabelas Fato
 * `fact_sales` — grão definido no nível de pedido
-* `fact_detail`grão definido no nível de item do pedidonível de item do pedido
+* `fact_detail` - grão definido no nível de item do pedidonível de item do pedido
 
 ### Data Marts Analíticos
 Além do modelo dimensional, a Gold Layer disponibiliza **Data Marts com métricas pré-agregadas**, prontos para consumo por ferramentas de BI e Analytics:
@@ -144,6 +144,12 @@ Durante o desenvolvimento do pipeline, alguns desafios técnicos incluíram:
 * Separação adequada entre camada de tratamento (Silver) e modelagem (Gold)
 Essas decisões foram fundamentais para garantir consistência analítica e escalabilidade.
 
+## Decisões Arquiteturais
+* Separação clara entre tratamento (Silver) e modelagem analítica (Gold)
+* Utilização de Star Schema para otimizar consultas e reduzir complexidade de JOINs
+* Uso de Delta Lake para garantir consistência transacional (ACID)
+* Estrutura preparada para evolução para cargas incrementais
+
 ## Conceitos Aplicados
 * ETL
 * Arquitetura Lakehouse
@@ -158,12 +164,12 @@ Essas decisões foram fundamentais para garantir consistência analítica e esca
 Em ambiente produtivo, este pipeline poderia evoluir com:
 * Particionamento por data
 * Processamento incremental
-* Orquestração com ferramenta dedicada
+* Orquestração com ferramenta dedicada (ex: Apache Airflow)
 * Monitoramento e logging
 * Validação de qualidade de dados
 
 ---
 ## Notas
 [^1]:Catálogo de dados: organiza e descreve os dados disponíveis
-[^2]:Linha de dados mostra o caminho que eles percorrem da origem até o consumo
+[^2]:Data Lineage representa o fluxo dos dados desde a origem até o consumo final.
 [^3]:Processos implementação de pipeline por níveis: [Checklist de Implementação](https://www.linkedin.com/in/nadinne-cavalcante/)
