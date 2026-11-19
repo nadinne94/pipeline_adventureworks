@@ -9,6 +9,8 @@ O pipeline foi desenvolvido com foco em arquitetura Lakehouse e modelagem dimens
 
 O projeto foi desenvolvido em ambiente Databricks utilizando processamento distribuído com Apache Spark.
 
+> **Código:** os 14 notebooks do pipeline, do setup à camada Gold, estão em [dabricks_data_engineer_learning_plan/etl_adventureworks](https://github.com/nadinne94/dabricks_data_engineer_learning_plan/tree/main/etl_adventureworks). Este repositório reúne a documentação de cada camada, com o link para o notebook correspondente no fim de cada página.
+
 ## Arquitetura do Pipeline
 O projeto segue a arquitetura Lakehouse, organizando os dados em três camadas:
 ![Diagrama Raw → Bronze → Silver → Gold](https://github.com/user-attachments/assets/9c0797c5-b911-447a-96a7-905b07b59b8a)

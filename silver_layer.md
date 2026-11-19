@@ -59,7 +59,7 @@ Campos técnicos comuns:
 * Criação de uma visão consolidada do relacionamento cliente ↔ endereço
 Essa tabela atua como **entidade conformada**, simplificando joins futuros na Gold Layer.
 
->Notebook: [CustomerAddress](https://github.com/nadinne94/dabricks_data_engineer_learning_plan/blob/main/etl_adventureworks/04_Silver_CustomerAddress.ipynb)
+>Notebook: [CustomerAddress](https://github.com/nadinne94/dabricks_data_engineer_learning_plan/blob/main/etl_adventureworks/04_Silver_CustomerAdrress.ipynb)
 
 ## Transformação de Produtos (`silver.product`)
 * Enriquecimento com categoria, modelo e descrição

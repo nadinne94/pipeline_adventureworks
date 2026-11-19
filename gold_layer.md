@@ -251,7 +251,7 @@ Mês × Ano
 * Análise de sazonalidade
 * Comparações mensais e trimestrais
 
-> Notebook: [Data Marts](https://github.com/nadinne94/dabricks_data_engineer_learning_plan/blob/main/etl_adventureworks/13_Gold_Data_Marts)
+> Notebook: [Data Marts](https://github.com/nadinne94/dabricks_data_engineer_learning_plan/blob/main/etl_adventureworks/13_Gold_Data_Marts.ipynb)
 
 ## Persistência e Governança
 * Todas as tabelas são gravadas em **Delta Lake**
